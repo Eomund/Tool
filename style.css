@@ -1,0 +1,123 @@
+td, th{
+	border:1px solid #000000;
+	padding:5px;
+}
+
+table{
+	border-collapse:collapse;	
+	
+}
+
+.none{
+	display:none;	
+}
+
+.page{
+	width:800px;
+	margin:100px auto;
+	
+	
+}
+
+.row{
+	margin:10px 0;	
+}
+
+
+.one label, .fake{
+	width:150px;
+	display:inline-block;	
+	vertical-align: top;
+}
+
+.one .radio, .one .roll{
+	width:auto;	
+}
+.choice > div{
+	display:inline-block;
+}
+
+.opt{
+	display:inline-block;
+	margin-right:30px;	
+}
+
+.choice1{
+	margin-right:100px;	
+}
+
+.one input.roll{
+	width:15px;	
+	margin-left:5px;
+}
+
+.one{
+	display:none;	
+}
+
+.buttons input[type="button"]{
+	margin:20px;
+		
+}
+
+.cards .row{
+	cursor:pointer;
+}
+
+.cards{
+	width:100%;	
+	margin-top:25px;
+}
+
+.edit{
+	border:1px solid #000000;
+	margin:10px;
+	padding:10px;	
+}
+
+.nothing{
+	display:none;
+}
+
+.moreoptions{
+	margin-left:5px;
+}
+
+
+.sstatus, .stype, .splace{
+	display:inline-block;
+	vertical-align:top;
+	
+}
+
+ .stype, .sstatus{
+	margin-left:50px;
+}
+
+.moreoptions{
+	float:right;	
+}
+
+.searchword{
+   width: -webkit-calc(100% - 70px);
+    width:    -moz-calc(100% - 70px);
+    width:         calc(100% - 70px);
+}
+
+.search{
+	float:right;	
+}
+
+.new{
+	margin-top:50px;	
+}
+
+.more{
+	display:none;	
+}
+
+.hidden{
+	
+	display:none;
+}
+
