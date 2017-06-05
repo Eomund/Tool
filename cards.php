@@ -467,6 +467,32 @@ $(".new").click(function(){
 	$(".list").slideUp();
 	$(".one").slideDown();
 });
+
+$(".roll").on("change", function(){
+	var first = $(this).attr('id').substring(4,5);
+	var second = $(this).attr('id').substring(5,6);
+	var other;
+	var newNum = parseInt($(this).val());
+	if($(this).val() % 1 != 0 || newNum < 1 || newNum > 6){
+		alert("Invalid dice roll");
+		$(this).select();
+		$(this).css('background', '#ff0000');
+		return;
+	}else{
+		$(this).css('background', '#ffffff');
+	}
+	if(second == 2){
+		//The bottom number is changed
+		other = newNum - 1;
+		$("#roll" + first + "1").val(other);
+	}else{
+		//The top number is changed
+		other = newNum + 1;
+		$("#roll" + first + "2").val(other);
+	}
+
+	
+});
 });
 </script>
 <?php include('includes/footer.php'); ?>
