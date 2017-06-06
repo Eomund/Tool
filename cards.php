@@ -171,6 +171,8 @@ function pad(num, size) {
 }
 
 function switchToCard(data){
+	$(".old").attr('checked', false);
+	
 	$(".name").val(data.name);
 	$(".place").val(data.place);
 	$(".description").val(data.description);
