@@ -20,9 +20,14 @@
 		xhr.open('POST', 'includes/tokensignin.php');
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		xhr.onload = function() {
+			
 			console.log(xhr.status);
-			console.log('Signed in as: ' + xhr.responseText);
-			window.location.href = "/cards.php";
+			if(xhr.responseText ==  profile.getName()){
+				console.log('Signed in as: ' + xhr.responseText);
+				window.location.href = "/cards.php";
+			}else{
+				alert("Unauthorized");	
+			}
 		};
 		xhr.send('idtoken=' + id_token);
   

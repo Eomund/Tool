@@ -7,7 +7,7 @@ if(!isset($_SESSION)){
 $data = json_decode (file_get_contents ("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=". $_POST["idtoken"]));
 
 if($data->aud == "195292382510-vs6021ptvdkk6gt2k9a9immrcqarji2h.apps.googleusercontent.com"){
-	$data = getUserData($data->name);
+	$data = getUserData($data->email);
 	if(!$data){
 		//Unathorized
 		header("HTTP/1.1 401 Unauthorized");

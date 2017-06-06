@@ -1,116 +1,136 @@
-<?php include('includes/header.php'); ?>
+<?php 
+
+if(!isset($_SESSION)){
+	session_start();
+}
+
+if(!isset($_SESSION['user'])){
+	header('Location:/');
+	die();
+}
+
+include('includes/header.php'); 
+
+?>
 
 
 <div class='page'>
-	<div class='list'>
-		<div class='searchstuff'>
-			<div class='row'>
-				<input type='text' class='searchword' />
-				<input type='button' value='Search' class='search' />
-			</div>
-			<div class='row'>
-				<input class='moreoptions' type='button' value='More Options' />
-			</div>
-			<div class='more'>
-				<div class='row'>
-					
-					
-						
-					
-				</div>
-				<div class='row'>
-					<div class='splace'>
-					
-					</div>
-					<div class='stype'>
-						<strong>Types</strong><br/>
-						<input type='checkbox' id='schoice' />
-						<label for='schoice'>Choice</label><br />
-						<input type='checkbox' id='sdealwithit' />
-						<label for='sdealwithit'>Deal with it</label><br />
-					</div>
-					<div class='sstatus'>
-						<strong>Status</strong><br />
-						<input type='checkbox' id='sgettingstarted' />
-						<label for='sgettingstarted'>Getting Started</label><br />
-						<input type='checkbox' id='sneedswork'/>
-						<label for='sneedswork'>Needs Work</label><br />
-						<input type='checkbox' id='salmostthere' />
-						<label for='salmostthere'>Almost There</label><br />
-						<input type='checkbox' id='sdone' />
-						<label for='sdone'>Done</label><br />
-					</div>
-				</div>
-						
-			</div>
+<div class='chat'>
+		<div class='chattext'>
 		</div>
-		<div class='row'>
-			<input class='new' value='New Card' type='button' />
-		</div>
-		<table class='cards'>
-		</table>
-		<div class='nothing'>No results found.</div>
+		<input type='text' class='newmessage' />
 	</div>
-	<div class='one'>
-		<div class='hidden'></div>
-		<div class='row edit'></div>
-		<div class='row'>
-			<label for='status'>Status:</label>
-			<select id='status' class='status'>
-				<option value='Getting started'>Getting started</option>
-				<option value='Needs work'>Needs work</option>
-				<option value='Almost there'>Almost there</option>
-				<option value='Done'>Done</option>
-			</select>
-		</div>
-		<div class='row'><label for='name'>Name:</label><input type='text' id='name' class='name' /></div>
-		<div class='row'><label for='place'>Region/Building:</label>
-			<select id='place' class='place'>
-			</select>
-		</div>
-		<div class='row'><div><label for='description'>Description:</label></div><div><textarea id='description' class='description'></textarea></div></div>
-		<div class='row'><div class='fake'>Type:</div>
-		<label for='choice' class='radio'>Choice</label><input name='type' type='radio'  value='choice' class='choiceopt' />
-		<label for='dealwithit' class='radio'>Deal With It</label><input name='type' type='radio'value='dealwithit' class='dealwithit' />
-		
-		<div class='deal'>
-			<div class='row'><div><label for='outcome'>Outcome:</label></div><div><textarea id='outcome' class='outcome'></textarea></div></div>
-		</div>
-		<div class='choice'>
-			<div class='choice1'>
+	<div class='main'>
+		<div class='list'>
+			<div class='searchstuff'>
 				<div class='row'>
-					<div class='row'><div><label for='option1'>Option 1:</label></div><div><textarea id='option1' class='option1'></textarea></div></div>
-					<div class='row'><label class='roll' for='roll11'>Roll 1 to</label><input class='roll11 roll' id='roll11' type='text' /></div>
-					<div class='row'><div><label for='good1'>Good Outcome:</label></div><div><textarea id='good1' class='good1'></textarea></div></div>
-					<div class='row'><label class='roll' for='roll12'>Roll</label><input class='roll12 roll' id='roll12' type='text' /> to 6</div>
-					<div class='row'><div><label for='bad1'>Bad Outcome:</label></div><div><textarea id='bad1' class='bad1'></textarea></div></div>
+					<input type='text' class='searchword' />
+					<input type='button' value='Search' class='search' />
+				</div>
+				<div class='row'>
+					<input class='moreoptions' type='button' value='More Options' />
+				</div>
+				<div class='more'>
+					<div class='row'>
+						
+						
+							
+						
+					</div>
+					<div class='row'>
+						<div class='splace'>
+						
+						</div>
+						<div class='stype'>
+							<strong>Types</strong><br/>
+							<input type='checkbox' id='schoice' />
+							<label for='schoice'>Choice</label><br />
+							<input type='checkbox' id='sdealwithit' />
+							<label for='sdealwithit'>Deal with it</label><br />
+						</div>
+						<div class='sstatus'>
+							<strong>Status</strong><br />
+							<input type='checkbox' id='sgettingstarted' />
+							<label for='sgettingstarted'>Getting Started</label><br />
+							<input type='checkbox' id='sneedswork'/>
+							<label for='sneedswork'>Needs Work</label><br />
+							<input type='checkbox' id='salmostthere' />
+							<label for='salmostthere'>Almost There</label><br />
+							<input type='checkbox' id='sdone' />
+							<label for='sdone'>Done</label><br />
+						</div>
+					</div>
+							
 				</div>
 			</div>
-			<div class='choice2'>
-				<div class='row'>
-					<div class='row'><div><label for='option2'>Option 2:</label></div><div><textarea id='option2' class='option2'></textarea></div></div>
-					<div class='row'><label class='roll' for='roll21'>Roll 1 to</label><input class='roll21 roll' id='roll21' type='text' /></div>
-					<div class='row'><div><label for='good2'>Good Outcome:</label></div><div><textarea id='good2' class='good2'></textarea></div></div>
-						<div class='row'><label class='roll' for='roll22'>Roll</label><input class='roll22 roll' id='roll22' type='text' /> to 6</div>
-					<div class='row'><div><label for='bad2'>Bad Outcome:</label></div><div><textarea id='bad2' class='bad2'></textarea></div></div>
-				</div>
+			<div class='row'>
+				<input class='new' value='New Card' type='button' />
 			</div>
+			<table class='cards'>
+			</table>
+			<div class='nothing'>No results found.</div>
 		</div>
+		<div class='one'>
+			<div class='hidden'></div>
+			<div class='row edit'></div>
+			<div class='row'>
+				<label for='status'>Status:</label>
+				<select id='status' class='status'>
+					<option value='Getting started'>Getting started</option>
+					<option value='Needs work'>Needs work</option>
+					<option value='Almost there'>Almost there</option>
+					<option value='Done'>Done</option>
+				</select>
+			</div>
+			<div class='row'><label for='name'>Name:</label><input type='text' id='name' class='name' /></div>
+			<div class='row'><label for='place'>Region/Building:</label>
+				<select id='place' class='place'>
+				</select>
+			</div>
+			<div class='row'><div><label for='description'>Description:</label></div><div><textarea id='description' class='description'></textarea></div></div>
+			<div class='row'><div class='fake'>Type:</div>
+			<label for='choice' class='radio'>Choice</label><input name='type' type='radio'  value='choice' class='choiceopt' />
+			<label for='dealwithit' class='radio'>Deal With It</label><input name='type' type='radio'value='dealwithit' class='dealwithit' />
 			
-		
+			<div class='deal'>
+				<div class='row'><div><label for='outcome'>Outcome:</label></div><div><textarea id='outcome' class='outcome'></textarea></div></div>
+			</div>
+			<div class='choice'>
+				<div class='choice1'>
+					<div class='row'>
+						<div class='row'><div><label for='option1'>Option 1:</label></div><div><textarea id='option1' class='option1'></textarea></div></div>
+						<div class='row'><label class='roll' for='roll11'>Roll 1 to</label><input class='roll11 roll' id='roll11' type='text' /></div>
+						<div class='row'><div><label for='good1'>Good Outcome:</label></div><div><textarea id='good1' class='good1'></textarea></div></div>
+						<div class='row'><label class='roll' for='roll12'>Roll</label><input class='roll12 roll' id='roll12' type='text' /> to 6</div>
+						<div class='row'><div><label for='bad1'>Bad Outcome:</label></div><div><textarea id='bad1' class='bad1'></textarea></div></div>
+					</div>
+				</div>
+				<div class='choice2'>
+					<div class='row'>
+						<div class='row'><div><label for='option2'>Option 2:</label></div><div><textarea id='option2' class='option2'></textarea></div></div>
+						<div class='row'><label class='roll' for='roll21'>Roll 1 to</label><input class='roll21 roll' id='roll21' type='text' /></div>
+						<div class='row'><div><label for='good2'>Good Outcome:</label></div><div><textarea id='good2' class='good2'></textarea></div></div>
+							<div class='row'><label class='roll' for='roll22'>Roll</label><input class='roll22 roll' id='roll22' type='text' /> to 6</div>
+						<div class='row'><div><label for='bad2'>Bad Outcome:</label></div><div><textarea id='bad2' class='bad2'></textarea></div></div>
+					</div>
+				</div>
+			</div>
+				
+			
+		</div>
+		<div class='row buttons'><input type='button' value='Save' class='save' /><input type='button' value='Save and exit' class='exit' /><input value='Cancel' class='cancel' type='button' /></div>
+		<div class='row'>
+			<input type='checkbox' id='old' class='old' /><label for='old'>Show previous versions</label>
+		</div>
+		<div class='row olddiv'>
+		</div>
 	</div>
-	<div class='row buttons'><input type='button' value='Save' class='save' /><input type='button' value='Save and exit' class='exit' /><input value='Cancel' class='cancel' type='button' /></div>
-	<div class='row'>
-		<input type='checkbox' id='old' class='old' /><label for='old'>Show previous versions</label>
-	</div>
-	<div class='row olddiv'>
-	</div>
-</div>
 
+</div>
+	
 
 <script type='text/javascript'>
-
-	
+var lastid = -1;
 function drawTable(data){
 
 	var str = "<thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Status</th></thead><tbody>";
@@ -303,6 +323,35 @@ function search(){
 		$(".nothing").show();	
 	}	
 }
+
+
+function getMessages(){
+	$.ajax({
+			url: "/ajax.php?action=getmessages",
+			data:{"last":lastid}
+		}).done(function(data) {
+			console.log(data);
+			if(data == ""){
+				window.location.href = "/index.php";
+			}else{
+				data = $.parseJSON(data);
+				if(data.length > 0){
+					lastid = data[data.length - 1].id;
+					var str = "";
+					for(var i = 0; i < data.length; i++){
+						str += "<div style='color:#" + data[i].colour + "'>" + data[i].initials + ":" + data[i].message + "</div>";
+					}
+					$(".chattext").html($(".chattext").html() + str);
+					$(".chattext").scrollTop($(".chattext").prop("scrollHeight"));
+				}
+				setTimeout(getMessages, 1000);
+			}
+			
+		}).fail(function(A, B, C) {
+			alert("BAD:" + A + ":" + B + ":" + C);
+	});	
+	
+}
 $(document).ready(function(){
 
 $.ajax({
@@ -493,6 +542,35 @@ $(".roll").on("change", function(){
 
 	
 });
+
+$('.newmessage').bind("enterKey",function(e){
+  $.ajax({
+		url: "/ajax.php?action=message",
+		data:{"message":$(this).val()}
+	}).done(function(data) {
+		console.log("Sending:" + data);
+		if(data == ""){
+			window.location.href = "/index.php";
+		}else{
+			
+			$('.newmessage').val('');
+		}
+		
+	}).fail(function(A, B, C) {
+		alert("BAD:" + A + ":" + B + ":" + C);
+	});	
+});
+$('.newmessage').keyup(function(e){
+    if(e.keyCode == 13)
+    {
+        $(this).trigger("enterKey");
+    }
+    
+});
+
+
+setTimeout(getMessages, 1000);
+
 });
 </script>
 <?php include('includes/footer.php'); ?>

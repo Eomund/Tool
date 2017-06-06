@@ -12,13 +12,18 @@ table{
 	display:none;	
 }
 
-.page{
+.main{
 	width:800px;
 	margin:100px auto;
 	
 	
 }
 
+.page{
+	width:1300px;
+	margin:0 auto;
+	
+}
 .row{
 	margin:10px 0;	
 }
@@ -126,5 +131,28 @@ textarea{
 .hidden{
 	
 	display:none;
+}
+
+.chat{
+	width:200px;
+	position:fixed;
+	top:0;
+	right:0;
+	bottom:0;
+}
+
+.chattext{
+	overflow-y:scroll;
+	height: -webkit-calc(100% - 23px);
+   height:    -moz-calc(100% - 23px);
+    height         calc(100% - 23px);
+    border:1px solid;
+}
+
+.newmessage{
+	bottom:0;
+	position:fixed;
+	bottom:0px;	
+	width:100%;
 }
 

@@ -1,5 +1,5 @@
 <?php
-include('details.php');
+require_once('details.php');
 $dsn = 'mysql:host='.$host.';dbname=' . $dbname;
 $options = array(
     PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
@@ -14,20 +14,20 @@ class DB{
 	static function setup(){
 		
 			
-		DB::$dbh->exec("CREATE TABLE IF NOT EXISTS users ( id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL , initials VARCHAR(50) NOT NULL , colour VARCHAR(6) NOT NULL )");
+		DB::$dbh->exec("CREATE TABLE IF NOT EXISTS users ( id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL , email VARCHAR(50) NOT NULL, initials VARCHAR(50) NOT NULL , colour VARCHAR(6) NOT NULL )");
 		DB::$dbh->exec("CREATE TABLE IF NOT EXISTS places ( id INT NOT NULL AUTO_INCREMENT , name VARCHAR(50) NOT NULL , active BOOLEAN NOT NULL , PRIMARY KEY (id))");
 		DB::$dbh->exec("CREATE TABLE IF NOT EXISTS revisions ( id INT NOT NULL AUTO_INCREMENT , card INT NOT NULL , name VARCHAR(50) NOT NULL , description TEXT NOT NULL , place INT NOT NULL , user INT NOT NULL, edittime TIMESTAMP NOT NULL , PRIMARY KEY (id))");
 		DB::$dbh->exec("CREATE TABLE IF NOT EXISTS choice ( id INT NOT NULL AUTO_INCREMENT , revision INT NOT NULL, option1 TEXT NOT NULL, roll1 INT NOT NULL , good1 TEXT NOT NULL , bad1 TEXT NOT NULL, option2 TEXT NOT NULL, roll2 INT NOT NULL , good2 TEXT NOT NULL , bad2 TEXT NOT NULL, PRIMARY KEY (id)) ");
 		DB::$dbh->exec("CREATE TABLE IF NOT EXISTS dealwithit ( id INT NOT NULL AUTO_INCREMENT , revision INT NOT NULL, outcome TEXT NOT NULL , PRIMARY KEY (id))  "); 
-		DB::$dbh->exec("CREATE TABLE IF NOT EXISTS notes ( id INT NOT NULL AUTO_INCREMENT , type ENUM('card') NOT NULL , user INT NOT NULL , time TIMESTAMP NOT NULL , text TEXT NOT NULL , PRIMARY KEY (id)) "); 
 		DB::$dbh->exec("CREATE TABLE IF NOT EXISTS card ( id INT NOT NULL AUTO_INCREMENT , status ENUM('Getting started', 'Needs work', 'Almost there', 'Done'), PRIMARY KEY (id)) ");
+		DB::$dbh->exec("CREATE TABLE IF NOT EXISTS messages ( id INT NOT NULL AUTO_INCREMENT, user INT NOT NULL, message TEXT NOT NULL, PRIMARY KEY (id)) ");
 		echo "Setup complete!";
 		
 	} 
 	
-	static function getUserData($name){
-			$query = DB::$dbh->prepare('SELECT * FROM users WHERE name = ?');
-			$query->execute(Array($name));
+	static function getUserData($email){
+			$query = DB::$dbh->prepare('SELECT * FROM users WHERE email = ?');
+			$query->execute(Array($email));
 			$data = $query->fetchAll(PDO::FETCH_OBJ);
 			if(count($data) == 0){
 				return false;		
@@ -139,6 +139,20 @@ class DB{
 			$query = DB::$dbh->prepare("UPDATE revisions SET edittime = NOW() WHERE id = ?");
 			$query->execute(Array($id));
 		
+	}
+	
+	static function addMessage($message){
+		
+		$query = DB::$dbh->prepare("INSERT INTO messages (user, message, time) VALUES(?, ?, NOW());");
+		$query->execute(Array($_SESSION['user']->id, $message));	
+
+	}
+	
+	static function getMessages($last){
+		$query = DB::$dbh->prepare("SELECT messages.id as id, message, initials, colour FROM messages, users WHERE messages.id > ? AND users.id = user ORDER BY messages.id ASC");
+		$query->execute(Array($last));
+		$res = $query->fetchAll(PDO::FETCH_ASSOC);
+		return $res;
 	}
 	
 }

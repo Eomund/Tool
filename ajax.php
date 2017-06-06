@@ -37,6 +37,14 @@ switch($_GET['action']){
 		$data = DB::getCard($_GET['id']);
 		echo json_encode($data);
 		break;
+	case 'message':
+		DB::addMessage($_GET['message']);
+		echo  json_encode($_GET['message']);
+		break;
+	case 'getmessages':
+		$data = DB::getMessages($_GET['last']);
+		echo json_encode($data);
+		break;
 }
 
 
