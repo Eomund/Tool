@@ -143,7 +143,7 @@ class DB{
 	
 	static function addMessage($message){
 		
-		$query = DB::$dbh->prepare("INSERT INTO messages (user, message, time) VALUES(?, ?, NOW());");
+		$query = DB::$dbh->prepare("INSERT INTO messages (user, message) VALUES(?, ?);");
 		$query->execute(Array($_SESSION['user']->id, $message));	
 
 	}
